@@ -1,0 +1,33 @@
+
+main {
+  width: 700px;
+  margin: 0 auto;
+}
+.wrap {
+  width: 300px;
+  margin: 0 auto;
+}
+table {
+  width: 600px;
+  margin: 0 auto;
+  border-collapse: collapse;
+  /*убираем пустые промежутки между ячейками*/
+  border: 1px solid grey;
+  /*устанавливаем для таблицы внешнюю границу серого цвета толщиной 1px*/
+}
+th {
+  width: auto;
+  border: 1px solid grey;
+}
+td {
+  border: 1px solid grey;
+  width: 150px;
+}
+select {
+  width: -webkit-fill-available;
+}
+.btnExport {
+  display: block;
+  width: 200px;
+  margin: 0 auto;
+}
