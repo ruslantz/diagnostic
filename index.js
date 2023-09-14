@@ -34,8 +34,12 @@ document.addEventListener("DOMContentLoaded", function () {
       radioGroup.classList.add("radio-group");
 
       const radio0 = createRadioInput("0", groupName, colors[0]);
-      const radio1 = createRadioInput("1", groupName, colors[1]);
-      const radio2 = createRadioInput("2", groupName, colors[2]);
+radio0.setAttribute("data-color", colors[0]);
+const radio1 = createRadioInput("1", groupName, colors[1]);
+radio1.setAttribute("data-color", colors[1]);
+const radio2 = createRadioInput("2", groupName, colors[2]);
+radio2.setAttribute("data-color", colors[2]);
+
 
       radioGroup.appendChild(radio0);
       radioGroup.appendChild(radio1);
@@ -83,14 +87,15 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   function exportToExcel(data) {
+    const columnHeaderRow = Array.from(document.querySelectorAll("th")).map((th) => th.textContent);
     const wsData = [
-      ['Имя', ...Array.from({ length: 6 }, (_, index) => `Параметр ${index + 1}`)],
+      [...columnHeaderRow], // Используйте названия колонок из HTML
       ...data
     ];
     const ws = XLSX.utils.aoa_to_sheet(wsData);
     const wb = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(wb, ws, "Sheet1");
-
+  
     const fileName = "exported_data.xlsx";
     XLSX.writeFile(wb, fileName);
   }
