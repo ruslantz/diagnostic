@@ -1,33 +1,65 @@
+.form {
+  width: 1200px;
+  margin: 20px auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #ffffff;
+  text-align: center;
+  box-sizing: border-box;
+}
 
-main {
-  width: 700px;
-  margin: 0 auto;
+.form_wrapper {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-auto-rows: max-content;
+  gap: 10px;
 }
-.wrap {
-  width: 300px;
-  margin: 0 auto;
+
+.input_wrapper {
+  background-color: #f9f9f9;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-between;
+  border-radius: 5px;
 }
-table {
-  width: 600px;
-  margin: 0 auto;
-  border-collapse: collapse;
-  /*убираем пустые промежутки между ячейками*/
-  border: 1px solid grey;
-  /*устанавливаем для таблицы внешнюю границу серого цвета толщиной 1px*/
+
+label {
+  padding-bottom: 10px;
 }
-th {
-  width: auto;
-  border: 1px solid grey;
-}
-td {
-  border: 1px solid grey;
-  width: 150px;
-}
+
 select {
-  width: -webkit-fill-available;
+  width: 130px;
 }
-.btnExport {
-  display: block;
-  width: 200px;
-  margin: 0 auto;
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+table,
+th,
+td {
+  border: 1px solid #ccc;
+}
+
+/* Стили для заголовков таблицы */
+th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+  padding: 10px;
+  text-align: center;
+}
+
+/* Стили для строк таблицы */
+td {
+  padding: 10px;
+  text-align: center;
+}
+
+/* Подсветка строк при наведении */
+tr:hover {
+  background-color: #e0e0e0;
 }

@@ -3,32 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./styles.css">
     <title>Таблица с данными</title>
 </head>
 <body>
-  <main>
-    <div class="wrap">
-      <input id="input_name" type="text" placeholder="Введите имя" />
-      <button id="addRowButton">Добавить строку</button>
-    </div>
-      <table>
-          <thead>
-              <tr>
-                  <th>Имя</th>
-                  <th>Ребенок выполняет бросание и катание мяча вниз, вдаль</th>
-                  <th>Ребенок выполняет подлезание, пролезание в обруч, лазанье по лесенке-стремянке вверх-вниз</th>
-                  <th>Ребенок выполняет ходьбу за педагогом стайкой в прямом направлении</th>
-                  <th>Ребенок выполняет ходьбу по дорожке, вверх-вниз по наклонной доске, подъем-спуск на ступеньки, перешагивание</th>
-                  <th>Ребенок может держать в одной руке сразу 2 предмета</th>
-                  <th>Ребенок может переворачивать страницы книги</th>
-              </tr>
-          </thead>
-          <tbody id="dataBody"></tbody>
-      </table>
-      <button class="btnExport" id="exportButton">Экспорт в Excel</button>
-
-  </main>
+    <input id="input_name" type="text" placeholder="Введите имя" />
+    <button id="addRowButton">Добавить строку</button>
+    <table>
+        <thead>
+            <tr>
+                <th>Имя</th>
+                <th>Ребенок выполняет бросание и катание мяча вниз, вдаль</th>
+                <th>Ребенок выполняет подлезание, пролезание в обруч, лазанье по лесенке-стремянке вверх-вниз</th>
+                <th>Ребенок выполняет ходьбу за педагогом стайкой в прямом направлении</th>
+                <th>Ребенок выполняет ходьбу по дорожке, вверх-вниз по наклонной доске, подъем-спуск на ступеньки, перешагивание</th>
+                <th>Ребенок может держать в одной руке сразу 2 предмета</th>
+                <th>Ребенок может переворачивать страницы книги</th>
+            </tr>
+        </thead>
+        <tbody id="dataBody"></tbody>
+    </table>
+    <button id="exportButton">Экспорт в Excel</button>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.4/xlsx.full.min.js"></script>
     <script src="./index.js"></script>

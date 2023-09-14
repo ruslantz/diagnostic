@@ -4,6 +4,13 @@ document.addEventListener("DOMContentLoaded", function () {
   const dataBody = document.getElementById("dataBody");
   let data = [];
 
+  // Цвета для каждого значения (0, 1, 2)
+  const colors = {
+    0: "#ffcdcd", // Замените на желаемый цвет для 0
+    1: "#feec90", // Замените на желаемый цвет для 1
+    2: "#92d050", // Замените на желаемый цвет для 2
+  };
+
   addRowButton.addEventListener("click", function () {
     const name = document.getElementById("input_name").value;
     const newRow = document.createElement("tr");
@@ -20,27 +27,26 @@ document.addEventListener("DOMContentLoaded", function () {
       "Ребенок может переворачивать страницы книги",
     ];
 
-    parameters.forEach((parameter, index) => {
+    parameters.forEach((parameter) => {
       const selectCell = document.createElement("td");
-      const select = document.createElement("select");
-      select.name = `parameter${index + 1}`;
-      select.id = `select${index + 1}`;
+      const radioGroup = document.createElement("div");
+      const groupName = `group_${data.length}_${parameters.indexOf(parameter)}`;
+      radioGroup.classList.add("radio-group");
 
-      const options = ["2", "1", "0"]; // Только значения, без текстовых описаний
+      const radio0 = createRadioInput("0", groupName, colors[0]);
+      const radio1 = createRadioInput("1", groupName, colors[1]);
+      const radio2 = createRadioInput("2", groupName, colors[2]);
 
-      options.forEach((option) => {
-        const optionElement = document.createElement("option");
-        optionElement.value = option;
-        optionElement.textContent = option;
-        select.appendChild(optionElement);
-      });
+      radioGroup.appendChild(radio0);
+      radioGroup.appendChild(radio1);
+      radioGroup.appendChild(radio2);
 
-      selectCell.appendChild(select);
+      selectCell.appendChild(radioGroup);
       newRow.appendChild(selectCell);
     });
 
     dataBody.appendChild(newRow);
-    data.push([name, ...parameters.map((_, index) => document.getElementById(`select${index + 1}`).value)]);
+    data.push([name, ...parameters.map((_, index) => getSelectedValue(newRow, index))]);
     document.getElementById("input_name").value = "";
   });
 
@@ -48,12 +54,33 @@ document.addEventListener("DOMContentLoaded", function () {
     // Обновляем данные перед экспортом
     data = Array.from(dataBody.querySelectorAll("tr")).map((row) => {
       const name = row.querySelector("td").textContent;
-      const selects = Array.from(row.querySelectorAll("select"));
-      return [name, ...selects.map((select) => select.value)];
+      return [name, ...Array.from({ length: 6 }, (_, index) => getSelectedValue(row, index))];
     });
 
     exportToExcel(data);
   });
+
+  function createRadioInput(value, groupName, color) {
+    const radio = document.createElement("input");
+    radio.type = "radio";
+    radio.name = groupName;
+    radio.value = value;
+    radio.addEventListener("change", function () {
+      radio.parentNode.querySelectorAll("input").forEach((input) => {
+        input.parentNode.style.backgroundColor = ""; // Очищаем цвет для всех кнопок
+      });
+      radio.parentNode.style.backgroundColor = color; // Устанавливаем цвет для выбранной кнопки
+    });
+
+    return radio;
+  }
+
+  function getSelectedValue(row, index) {
+    const radioGroups = row.querySelectorAll(".radio-group");
+    const selectedGroup = radioGroups[index];
+    const selectedRadio = selectedGroup.querySelector("input:checked");
+    return selectedRadio ? selectedRadio.value : "";
+  }
 
   function exportToExcel(data) {
     const wsData = [
